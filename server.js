@@ -1,6 +1,7 @@
 const express = require("express");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
+const cors = require("cors");
 
 const mongoose = require("./shared/mongoose.connect");
 
@@ -19,6 +20,7 @@ mongoose.connect();
 const app = express();
 
 app.use(express.json());
+app.use(cors);
 
 // app.use(Logging);
 app.use((req, res, next) => next());
