@@ -1,0 +1,4 @@
+{
+  "mongodb": "MENTOR_STUDENT_MONGO_DB",
+  "documentation": "MENTOR_STUDENT_DOCUMENTATION"
+}

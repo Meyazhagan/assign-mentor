@@ -1,0 +1,35 @@
+
+Assigning mentors and student
+
+Batch
+    - get all batch
+    - get particular batch
+    - post batch
+    - put batch
+    - delete batch
+
+mentors
+    - get all mentors
+    - get particular mentors
+    - post mentors
+    - put mentors
+    - delete mentors
+
+students
+    - get all students
+    - get particular students
+    - post students
+    - put students
+    - delete students
+
+assign
+    - get all assigned students for a mentor
+    - patch assign or change one student to one mentor
+    - patch assign many students to one mentor
+
+unassign
+    - get all unassigned students for a mentor
+    - patch unassign one student
+    - patch unassign many students
+
+
