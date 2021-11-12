@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("./shared/mongoose.connect");
 
 const noEndpoint = require("./middleware/noEndpoint");
+const Home = require("./middleware/home.middleware");
 // const Logging = require("./middleware/logging.middleware");
 const verifyBatch = require("./middleware/verifyBatch");
 
@@ -24,6 +25,7 @@ app.use(cors());
 
 // app.use(Logging);
 app.use((req, res, next) => next());
+app.use("/", Home);
 
 app.use("/batch", batch);
 app.use(verifyBatch);
