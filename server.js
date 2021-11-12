@@ -24,8 +24,8 @@ app.use(express.json());
 app.use(cors());
 
 // app.use(Logging);
+
 app.use((req, res, next) => next());
-app.use("/", Home);
 
 app.use("/batch", batch);
 app.use(verifyBatch);
