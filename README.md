@@ -2,4 +2,4 @@
 
 Deployed Link [Click Here](https://assign-mentor-and-student.herokuapp.com/)
 
-Documentation Link [Click Here}()
+Documentation Link [Click Here]()
