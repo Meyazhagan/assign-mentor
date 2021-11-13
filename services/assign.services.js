@@ -39,12 +39,15 @@ const many = async (req, res) => {
   const mentor = await Mentor.findOne({ _id: mentorId, batch: batchId });
   if (!mentor)
     return res.status(400).send({ message: "There is no mentor for given Id" });
-
-  const result = await Student.updateMany(
-    { _id: { $in: studentIds }, batch: batchId },
-    { $set: { mentor: mentorId } }
-  );
-  res.send(result);
+  try {
+    const result = await Student.updateMany(
+      { _id: { $in: studentIds }, batch: batchId },
+      { $set: { mentor: mentorId } }
+    );
+    res.send({ message: "Successfully Assigned" });
+  } catch (err) {
+    return res.status(400).send({ error: "error" });
+  }
 };
 const one = async (req, res) => {
   const batchId = req.batch?._id;
@@ -63,12 +66,15 @@ const one = async (req, res) => {
   const mentor = await Mentor.findOne({ _id: mentorId, batch: batchId });
   if (!mentor)
     return res.status(400).send({ message: "There is no mentor for given Id" });
-
-  const result = await Student.findOneUpdate(
-    { _id: studentId, batch: req.batch?._id },
-    { $set: { mentor: mentorId } }
-  );
-  res.send(result);
+  try {
+    const result = await Student.findOneAndUpdate(
+      { _id: studentId, batch: req.batch?._id },
+      { $set: { mentor: mentorId } }
+    );
+    res.send({ message: "Successfully Assigned" });
+  } catch (err) {
+    return res.status(400).send({ error: "error" });
+  }
 };
 
 module.exports = {
