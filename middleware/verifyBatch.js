@@ -1,3 +1,4 @@
+const config = require("config");
 const { Batch } = require("../model/batch");
 const { isValid } = require("../shared/ObjectId");
 
@@ -11,7 +12,10 @@ module.exports = async (req, res, next) => {
     batch = await Batch.findOne({ name: batch_name });
   }
   if (!batch)
-    return res.status(400).send({ message: "Batch Id or Name is invalid" });
+    return res.status(400).send({
+      message: "Batch Id or Name is Not Valid",
+      documentationLink: config.get("documentation"),
+    });
   req.batch = batch;
   next();
   return;

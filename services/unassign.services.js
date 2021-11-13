@@ -13,20 +13,23 @@ const getAllStudent = async (req, res) => {
 const many = async (req, res) => {
   const batchId = req.batch?._id;
   const bodySchema = Joi.object({
-    students: Joi.array().items(Joi.objectId()).required(),
+    studentIds: Joi.array().items(Joi.objectId()).required(),
   });
   const {
     error,
-    value: { students },
+    value: { studentIds },
   } = await bodySchema.validate(req.body);
 
   if (error) return res.status(401).send({ message: error.message });
-
-  const result = await Student.updateMany(
-    { _id: { $in: students }, batch: batchId },
-    { $unset: { mentor: null } }
-  );
-  res.send(result);
+  try {
+    const result = await Student.updateMany(
+      { _id: { $in: studentIds }, batch: batchId },
+      { $unset: { mentor: null } }
+    );
+    res.send({ message: "Successfully Unassigned" });
+  } catch (err) {
+    return res.status(400).send({ error: "error" });
+  }
 };
 
 const one = async (req, res) => {
@@ -40,12 +43,15 @@ const one = async (req, res) => {
     value: { studentId },
   } = await bodySchema.validate(req.body);
   if (error) return res.status(401).send({ message: error.message });
-
-  const result = await Student.updateOne(
-    { _id: studentId, batch: batchId },
-    { $unset: { mentor: null } }
-  );
-  res.send(result);
+  try {
+    const result = await Student.updateOne(
+      { _id: studentId, batch: batchId },
+      { $unset: { mentor: null } }
+    );
+    res.send({ message: "Successfully Unassigned" });
+  } catch (err) {
+    return res.status(400).send({ error: "error" });
+  }
 };
 
 module.exports = {
